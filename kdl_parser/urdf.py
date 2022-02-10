@@ -4,30 +4,30 @@ import kdl_parser.urdf_parser_py.urdf as urdf
 
 import PyKDL as kdl
 
-def treeFromFile(filename):
+def treeFromFile(filename, quiet=False):
     """
     Construct a PyKDL.Tree from an URDF file.
     :param filename: URDF file path
     """
 
     with open(filename) as urdf_file:
-        return treeFromUrdfModel(urdf.URDF.from_xml_string(urdf_file.read()))
+        return treeFromUrdfModel(urdf.URDF.from_xml_string(urdf_file.read()), quiet=quiet)
 
-def treeFromParam(param):
+def treeFromParam(param, quiet=False):
     """
     Construct a PyKDL.Tree from an URDF in a ROS parameter.
     :param param: Parameter name, ``str``
     """
 
-    return treeFromUrdfModel(urdf.URDF.from_parameter_server())
+    return treeFromUrdfModel(urdf.URDF.from_parameter_server(), quiet=quiet)
 
-def treeFromString(xml):
+def treeFromString(xml, quiet=False):
     """
     Construct a PyKDL.Tree from an URDF xml string.
     :param xml: URDF xml string, ``str``
     """
 
-    return treeFromUrdfModel(urdf.URDF.from_xml_string(xml))
+    return treeFromUrdfModel(urdf.URDF.from_xml_string(xml), quiet=quiet)
 
 def _toKdlPose(pose):
     # URDF might have RPY OR XYZ unspecified. Both default to zeros
